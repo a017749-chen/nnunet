@@ -1,0 +1,79 @@
+# ---------------------------------------------------------------------------
+# Data protection for a PUBLIC fork.
+#
+# This is a liver-segmentation project. Anything below could carry patient
+# imaging, or a model trained on it, and this repository is publicly visible.
+# A single `git add .` after a training run is all it takes.
+#
+# Added 2026-09-12. Upstream shipped no .gitignore at all.
+# ---------------------------------------------------------------------------
+
+# nnU-Net data roots (the three directories the env vars point at)
+nnUNet_raw/
+nnUNet_preprocessed/
+nnUNet_results/
+nnUNet_raw_data_base/
+nnUNet_trained_models/
+
+# Medical imaging — never commit these
+*.nii
+*.nii.gz
+*.dcm
+*.dicom
+*.ima
+*.mha
+*.mhd
+*.nrrd
+*.hdr
+*.img
+DICOMDIR/
+
+# Upstream's synthetic test fixtures are legitimate and stay tracked
+!nnunetv2/tests/example_data/*.nii.gz
+
+# Trained weights and checkpoints — a model trained on identifiable imaging can
+# itself be sensitive, and these are large
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.pb
+*.safetensors
+*.h5
+*.hdf5
+checkpoint_*.pth
+
+# Serialised arrays and intermediate preprocessing output
+*.npy
+*.npz
+*.b2nd
+*.pkl
+*.pickle
+
+# Prediction output and experiment logs
+predictions/
+inference_output/
+*_results/
+runs/
+lightning_logs/
+wandb/
+tensorboard/
+events.out.tfevents.*
+
+# Local config that may name real datasets or paths
+.env
+.env.*
+local_paths.py
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
